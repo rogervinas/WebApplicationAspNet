@@ -12,6 +12,15 @@ jobs:
     - uses: actions/checkout@v1
     - name: Build the Docker image
       shell: powershell
+      env:
+        DOCKER_USERNAME: rogervinas
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       run: |
+        $ErrorActionPreference = 'SilentlyContinue'
+        docker login --username ${Env:DOCKER_USERNAME} --password ${Env:DOCKER_PASSWORD}
+        $ErrorActionPreference = 'Stop'
         $version = $(Get-Date -Format yyyyMMddHHmmss)
-        docker build . --file Dockerfile --tag rogervinas-webapplication-aspnet:$version
+        docker build . --file Dockerfile --tag webapplication-aspnet:$version
+        docker tag webapplication-aspnet:$version ${Env:DOCKER_USERNAME}/webapplication-aspnet:$version
+        docker tag webapplication-aspnet:$version ${Env:DOCKER_USERNAME}/webapplication-aspnet:latest
+        docker push ${Env:DOCKER_USERNAME}/webapplication-aspnet
