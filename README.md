@@ -1,5 +1,7 @@
 # WebApplicationAspNet using Docker
 
+[![Actions Status](https://github.com/rogervinas/WebApplicationAspNet/workflows/dockerimage/badge.svg)](https://github.com/rogervinas/WebApplicationAspNet/actions)
+  
 This project uses **Windows Docker containers** to build and execute a simple ASP.NET web application.
 
 * For Windows: just use [Docker for Windows](https://docs.docker.com/docker-for-windows/)
@@ -41,6 +43,11 @@ curl -w "\n" -v http://localhost:8080/api/values
 ```
 curl -w "\n" -v http://$(docker-machine ip 2019-box):8080/api/values
 ```
+
+## Deploy
+
+This repo uses a GitHub Actions Workflow defined in [dockerimage.yml](.github/workflows/dockerimage.yml) to build a docker image and publish it to DockerHub.
+Check [Automating your workflow with GitHub Actions](https://help.github.com/en/categories/automating-your-workflow-with-github-actions) for more info.
 
 ## What's Next?
 
