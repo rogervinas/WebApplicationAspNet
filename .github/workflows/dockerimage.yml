@@ -5,10 +5,13 @@ on: [push]
 jobs:
 
   build:
- 
+
     runs-on: windows-2019
- 
+
     steps:
     - uses: actions/checkout@v1
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag rogervinas-webapplication-aspnet:latest
+      shell: powershell
+      run: |
+        $version = $(Get-Date -Format yyyyMMddHHmmss)
+        docker build . --file Dockerfile --tag rogervinas-webapplication-aspnet:$version
