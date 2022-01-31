@@ -17,6 +17,6 @@ RUN msbuild -t:Build -p:Configuration=Release `
 
 # Runtime image
 
-FROM microsoft/aspnet AS runtime
+FROM mcr.microsoft.com/dotnet/framework/aspnet:4.8 AS runtime
 
 COPY --from=builder /Work/Publish /inetpub/wwwroot
