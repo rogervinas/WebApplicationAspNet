@@ -1,6 +1,9 @@
-name: Docker Image CI
-
-on: [push]
+name: CI
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
 
@@ -9,11 +12,20 @@ jobs:
     runs-on: windows-2019
 
     steps:
+    
     - uses: actions/checkout@v1
     - name: Build the Docker image
+      if: ${{ github.event_name == 'pull_request' }}
+      shell: powershell
+      run: |
+        $version = $(Get-Date -Format yyyyMMddHHmmss)
+        docker build . --file Dockerfile --tag webapplication-aspnet:$version
+
+    - name: Push the Docker image
+      if: ${{ github.event_name == 'push' }}
       shell: powershell
       env:
-        DOCKER_USERNAME: rogervinas
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       run: |
         $ErrorActionPreference = 'SilentlyContinue'
