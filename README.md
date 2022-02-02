@@ -1,7 +1,7 @@
+[![CI](https://github.com/rogervinas/WebApplicationAspNet/actions/workflows/dockerimage.yml/badge.svg?branch=master)](https://github.com/rogervinas/WebApplicationAspNet/actions/workflows/dockerimage.yml)
+
 # WebApplicationAspNet using Docker
 
-[![Actions Status](https://github.com/rogervinas/WebApplicationAspNet/workflows/Docker%20Image%20CI/badge.svg)](https://github.com/rogervinas/WebApplicationAspNet/actions)
-  
 This project uses **Windows Docker containers** to build and execute a simple ASP.NET web application.
 
 * For Windows: just use [Docker for Windows](https://docs.docker.com/docker-for-windows/)
