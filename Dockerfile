@@ -2,7 +2,7 @@
 
 # Builder image
 
-FROM mcr.microsoft.com/dotnet/framework/sdk:4.8 AS builder
+FROM mcr.microsoft.com/dotnet/framework/sdk:4.8-windowsservercore-ltsc2022 AS builder
 
 SHELL ["cmd", "/S", "/C"]
 
@@ -17,6 +17,6 @@ RUN msbuild -t:Build -p:Configuration=Release `
 
 # Runtime image
 
-FROM mcr.microsoft.com/dotnet/framework/aspnet:4.8 AS runtime
+FROM mcr.microsoft.com/dotnet/framework/aspnet:4.8-windowsservercore-ltsc2022 AS runtime
 
 COPY --from=builder /Work/Publish /inetpub/wwwroot
